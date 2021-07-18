@@ -13,7 +13,34 @@ services:
       - ../backend/:/usr/src/app
     networks: 
       - bruni-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: bruni-webserver
+    restart: unless-stopped
+    ports: 
+      - 8000:80
+    volumes: 
+      - ./webserver/conf.d/:/etc/nginx/conf.d
+    networks: 
+      - bruni-network
+    depends_on: 
+      - backend
+
+  database:
+    image: mongo:5
+    container_name: bruni-database
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: kenji
+      MONGO_INITDB_ROOT_PASSWORD: kenji-X456UR
+    volumes: 
+      - mongo-data:/data/db
+    networks: 
+      - bruni-network
   
 networks: 
   bruni-network:
     driver: bridge
+
+volumes: 
+  mongo-data:
