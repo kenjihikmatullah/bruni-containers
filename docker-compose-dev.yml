@@ -1,0 +1,19 @@
+version: "3.7"
+
+services: 
+  backend:
+    build: 
+      context: ../backend/
+      dockerfile: ../containers/backend/Dockerfile.dev
+    image: bruni-backend:dev
+    container_name: bruni-backend-dev
+    restart: unless-stopped
+    working_dir: /usr/src/app
+    volumes: 
+      - ../backend/:/usr/src/app
+    networks: 
+      - bruni-network
+  
+networks: 
+  bruni-network:
+    driver: bridge
