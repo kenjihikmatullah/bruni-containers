@@ -35,6 +35,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: kenji-X456UR
     volumes: 
       - mongo-data:/data/db
+    networks: 
+      - bruni-network
   
 networks: 
   bruni-network:
