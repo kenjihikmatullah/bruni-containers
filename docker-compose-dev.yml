@@ -26,7 +26,19 @@ services:
       - bruni-network
     depends_on: 
       - backend
+
+  database:
+    image: mongo:5
+    container_name: bruni-database
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: kenji
+      MONGO_INITDB_ROOT_PASSWORD: kenji-X456UR
+    volumes: 
+      - mongo-data:/data/db
   
 networks: 
   bruni-network:
     driver: bridge
+
+volumes: 
+  mongo-data:
