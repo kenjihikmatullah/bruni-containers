@@ -13,6 +13,19 @@ services:
       - ../backend/:/usr/src/app
     networks: 
       - bruni-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: bruni-webserver
+    restart: unless-stopped
+    ports: 
+      - 8000:80
+    volumes: 
+      - ./webserver/conf.d/:/etc/nginx/conf.d
+    networks: 
+      - bruni-network
+    depends_on: 
+      - backend
   
 networks: 
   bruni-network:
